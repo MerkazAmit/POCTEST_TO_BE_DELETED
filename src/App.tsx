@@ -17,7 +17,7 @@ const App = (): React.ReactElement => {
 		theme: themes.dark,
 		toggleTheme: toggleTheme,
 	});
-
+	Bridge.Boof();
 	return (
 		<ThemeContext.Provider value={theme}>
 			<ThemeProvider theme={theme.theme}>

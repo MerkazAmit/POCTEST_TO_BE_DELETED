@@ -15,7 +15,5 @@ COPY ./src/ /app/src
 RUN npm run build
 
 
-FROM nginx
-ENV NGINX_PORT=8080
-EXPOSE 8080
-COPY --from=Build /app/build/ /usr/share/nginx/html
+FROM gideonmax/static-server
+COPY --from=Build /app/build/ /app/content/
