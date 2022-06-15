@@ -1,3 +1,3 @@
-declare namespace Bridge {
+declare namespace DAL {
     function Boof(): void
 }
