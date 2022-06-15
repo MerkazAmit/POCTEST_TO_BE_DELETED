@@ -48,8 +48,12 @@
 <ul>
 <li><a href="#how-to-transfer-image-to-different-network">How to transfer image to different network</a></li>
 <li><a href="#how-to-upload-image">How to upload image</a></li>
+<li><a href="#deployment-types">Deployment types</a>
+<ul>
 <li><a href="#deployment-for-sharepoint-backend">Deployment for sharepoint backend</a></li>
 <li><a href="#deployment-for-dedicated-backend">Deployment for dedicated backend</a></li>
+</ul>
+</li>
 </ul>
 <br>
 NOTE: any secrets (like certificate files, authentication...) should be handled by openshift.<br>
@@ -67,7 +71,15 @@ Do not copy any secrets to an image directly, it is a security concern and it al
 <li>Run <code>docker push &quot;&lt;registry&gt;/&lt;tag&gt;&quot;</code></li>
 <li>If an appropriate image stream exists on openshift (ask devops) run <code>oc import-image &quot;&lt;image-stream-tag&gt;&quot;</code>. Note, you must be logged in to openshift.</li>
 </ol>
-<h2 id="deployment-for-sharepoint-backend">Deployment for sharepoint backend</h2>
+<h2 id="deployment-types">Deployment types</h2>
+<p>There are 2 different types of deployment, depending on the backend you're using:</p>
+<h4 id=""></h4>
+<!-- no toc -->
+<ol>
+<li><a href="#deployment-for-sharepoint-backend">Deployment for sharepoint backend</a></li>
+<li><a href="#deployment-for-dedicated-backend">Deployment for dedicated backend</a></li>
+</ol>
+<h3 id="deployment-for-sharepoint-backend">Deployment for sharepoint backend</h3>
 <p>Since there is no backend, the DAL (data acces layer) will be different for each network.<br>
 Thus the DAL is going to be developed seperately on each network and must be incorporated into the project.<br>
 Since the DAL is not included in the original build, the DAL must be declared as a namespace in a .d.ts file like so:</p>
@@ -113,9 +125,9 @@ The project should also have a <code>Dockerfile</code> based on the ui image fro
 <li>Go to the DAL project, build the docker image</li>
 <li>Upload the new image you built in the previous step and update the openshift image stream</li>
 </ol>
-<h2 id="deployment-for-dedicated-backend">Deployment for dedicated backend</h2>
+<h3 id="deployment-for-dedicated-backend">Deployment for dedicated backend</h3>
 <p>Since we have a dedicated backend, the frontends don't have to be different between the networks, this greatly simplifies deployment:</p>
-<h2 id=""></h2>
+<h2 id="-1"></h2>
 <ol>
 <li>Build image</li>
 <li>Transfer image to target networks</li>

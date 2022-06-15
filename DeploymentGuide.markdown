@@ -2,8 +2,9 @@
 
 - [How to transfer image to different network](#how-to-transfer-image-to-different-network)
 - [How to upload image](#how-to-upload-image)
-- [Deployment for sharepoint backend](#deployment-for-sharepoint-backend)
-- [Deployment for dedicated backend](#deployment-for-dedicated-backend)
+- [Deployment types](#deployment-types)
+  - [Deployment for sharepoint backend](#deployment-for-sharepoint-backend)
+  - [Deployment for dedicated backend](#deployment-for-dedicated-backend)
 
 <br>
 NOTE: any secrets (like certificate files, authentication...) should be handled by openshift.<br>
@@ -20,7 +21,15 @@ Do not copy any secrets to an image directly, it is a security concern and it al
 2. Run `docker push "<registry>/<tag>"`
 3. If an appropriate image stream exists on openshift (ask devops) run `oc import-image "<image-stream-tag>"`. Note, you must be logged in to openshift.
 
-## Deployment for sharepoint backend
+## Deployment types
+
+There are 2 different types of deployment, depending on the backend you're using:
+####
+<!-- no toc -->
+1. [Deployment for sharepoint backend](#deployment-for-sharepoint-backend)
+2.  [Deployment for dedicated backend](#deployment-for-dedicated-backend)
+
+### Deployment for sharepoint backend
 Since there is no backend, the DAL (data acces layer) will be different for each network.<br>
 Thus the DAL is going to be developed seperately on each network and must be incorporated into the project.<br>
 Since the DAL is not included in the original build, the DAL must be declared as a namespace in a .d.ts file like so:
@@ -68,7 +77,7 @@ COPY --from=Build /app/build /app/content/
 4. Go to the DAL project, build the docker image
 5. Upload the new image you built in the previous step and update the openshift image stream
 
-## Deployment for dedicated backend
+### Deployment for dedicated backend
 Since we have a dedicated backend, the frontends don't have to be different between the networks, this greatly simplifies deployment:
 ##
 1. Build image
